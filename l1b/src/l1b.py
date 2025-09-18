@@ -24,11 +24,11 @@ class l1b(initL1b):
 
             # Read TOA - output of the ISM in Digital Numbers
             # -------------------------------------------------------------------------------
-            toa = readToa(self.indir, self.globalConfig.ism_toa + band + '.nc')
+            toa = readToa(self.indir, self.globalConfig.ism_toa + band + '.nc') #leemos la imagen de input
 
             # Equalization (radiometric correction)
             # -------------------------------------------------------------------------------
-            if self.l1bConfig.do_equalization:
+            if self.l1bConfig.do_equalization: #comprobar que está a true (por defecto lo está)
                 self.logger.info("EODP-ALG-L1B-1010: Radiometric Correction (equalization)")
 
                 # Read the multiplicative and additive factors from auxiliary/equalization/
@@ -36,7 +36,7 @@ class l1b(initL1b):
                 eq_add = readFactor(os.path.join(self.auxdir,self.l1bConfig.eq_add+band+NC_EXT),EQ_ADD)
 
                 # Do the equalization and save to file
-                toa = self.equalization(toa, eq_add, eq_mult)
+                toa = self.equalization(toa, eq_add, eq_mult) #esta es la función que hay que implementar (está más abajo la definición)
                 writeToa(self.outdir, self.globalConfig.l1b_toa_eq + band, toa)
 
             # Restitution (absolute radiometric gain)
@@ -63,6 +63,7 @@ class l1b(initL1b):
         :return: TOA in DN, equalized
         """
         #TODO
+        toa=(toa-eq_add)/eq_mult #página 88 de la teoria
         return toa
 
     def restoration(self,toa,gain):
@@ -73,6 +74,7 @@ class l1b(initL1b):
         :return: TOA in radiances [mW/sr/m2]
         """
         #TODO
+        toa=toa*gain
         self.logger.debug('Sanity check. TOA in radiances after gain application ' + str(toa[1,-1]) + ' [mW/m2/sr]')
 
         return toa
