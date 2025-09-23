@@ -6,9 +6,10 @@ import os
 
 class CompareToaSimple:
 
-    def __init__(self, output_dir, myoutput_dir, plots_dir):
+    def __init__(self, output_dir, myoutput_dir, plots_dir, input_dir):
         self.output_dir = output_dir  # Carpeta con TOA de referencia
         self.myoutput_dir = myoutput_dir  # Carpeta con tu TOA
+        self.input_dir = input_dir  # Carpeta con TOA de entrada
         self.plots_dir = plots_dir  # Carpeta para guardar gráficas
 
     def compare_band(self, band):
@@ -16,12 +17,15 @@ class CompareToaSimple:
 
         # Leer archivos
         filename = f"l1b_toa_{band}.nc"
+        filename2 = f"ism_toa_isrf_{band}.nc"
         toa_ref = readToa(self.output_dir, filename)
         toa_my = readToa(self.myoutput_dir, filename)
+        toa_in = readToa(self.input_dir, filename2)
 
         # Convertir a arrays 1D
         ref_flat = toa_ref.flatten()
         my_flat = toa_my.flatten()
+        in_flat = toa_in.flatten()
 
         # Calcular diferencia
         diff = ref_flat - my_flat
@@ -43,17 +47,18 @@ class CompareToaSimple:
 
         # Subplot 1: Valores TOA
         plt.subplot(2, 1, 1)
-        x = np.arange(min(1000, len(ref_flat)))  # Mostrar solo primeros 1000 puntos
-        plt.plot(x, ref_flat[:1000], 'b-', label=f'TOA Referencia {band}', alpha=0.7)
-        plt.plot(x, my_flat[:1000], 'r-', label=f'TOA MyOutput {band}', alpha=0.7)
+        x = np.arange(min(150, len(ref_flat)))  # Mostrar solo primeros 1000 puntos
+        plt.plot(x, ref_flat[:150], 'b-', label = f'TOA Referencia {band}', alpha = 0.7)
+        plt.plot(x, my_flat[:150], 'r-', label = f'TOA MyOutput {band}', alpha = 0.7)
+        plt.plot(x, in_flat[:150], 'g-', label = f'TOA Input {band}', alpha = 0.7)
         plt.ylabel('TOA [mW/m²/sr]')
         plt.legend()
         plt.grid(True, alpha=0.3)
-        plt.title(f'Comparación TOA - Banda {band}')
+        plt.title(f'Comparación TOA - Banda {band} + Input')
 
         # Subplot 2: Diferencia
         plt.subplot(2, 1, 2)
-        plt.plot(x, diff[:1000], 'g-', label='Diferencia (Ref - My)', alpha=0.7)
+        plt.plot(x, diff[:150], 'g-', label='Diferencia (Ref - My)', alpha=0.7)
         plt.axhline(y=three_sigma, color='r', linestyle='--', label=f'Límite 3σ = {three_sigma:.2e}')
         plt.axhline(y=-three_sigma, color='r', linestyle='--')
         plt.axhline(y=0, color='k', linestyle='-', alpha=0.5)
@@ -86,7 +91,7 @@ class CompareToaSimple:
         print(f"3σ: {three_sigma:.2e}")
         print(f"Criterio 1 (<0.1% elementos >0.01%): {'✅' if criterion_1 else '❌'}")
         print(f"Criterio 2 (max diff ≤ 3σ): {'✅' if criterion_2 else '❌'}")
-        print(f"VALIDACIÓN GENERAL: {'✅ APROBADO' if criterion_1 and criterion_2 else '❌ RECHAZADO'}")
+        print(f"VALIDACIÓN GENERAL: {'APROBADO' if criterion_1 and criterion_2 else 'RECHAZADO'}")
 
         return criterion_1 and criterion_2
 
@@ -110,9 +115,9 @@ class CompareToaSimple:
 
         print("\n" + "=" * 50)
         if all_valid:
-            print("🎉 ¡TODAS LAS BANDAS CUMPLEN LOS CRITERIOS!")
+            print("TODAS LAS BANDAS CUMPLEN LOS CRITERIOS")
         else:
-            print("⚠️  Algunas bandas NO cumplen los criterios")
+            print("Algunas bandas NO cumplen los criterios")
         print("=" * 50)
 
 
@@ -123,8 +128,9 @@ if __name__ == "__main__":
     output_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\output"
     myoutput_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\myoutput"
     plots_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\plots"
+    input_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\input"
 
-    comp = CompareToaSimple(output_dir, myoutput_dir, plots_dir)
+    comp = CompareToaSimple(output_dir, myoutput_dir, plots_dir, input_dir)
     comp.compare_all_bands()
 
 
