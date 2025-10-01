@@ -92,13 +92,13 @@ class mtf:
         :return fnAlt: 1D normalised frequencies 2D ALT (f/(1/w))
         """
         # DONE
-        fstepAlt = 1 / nlines / w
-        fstepAct = 1 / ncolumns / w
+        fstepAlt = 1/nlines/w
+        fstepAct = 1/ncolumns/w
 
         # 1D frequency vectors
         eps = 1e-10
-        fAlt = np.arange(-1 / (2 * w), 1 / (2 * w) - eps, fstepAlt)
-        fAct = np.arange(-1 / (2 * w), 1 / (2 * w) - eps, fstepAct)
+        fAlt = np.arange(-1 / (2*w), 1 / (2*w) - eps, fstepAlt)
+        fAct = np.arange(-1 / (2*w), 1 / (2*w) - eps, fstepAct)
 
         # Normalize the frequencies with the cut-off
         fc = D / (lambd * focal)
@@ -110,14 +110,11 @@ class mtf:
         fnAlt = fAlt / (1 / w)
 
         # 2D frequency grids
-        [fnAltxx, fnActxx] = np.meshgrid(fnAlt, fnAct,
-                                         indexing='ij')  # Please use ‘ij’ indexing or you will get the transpose
-        fn2D = np.sqrt(fnAltxx * fnAltxx + fnActxx * fnActxx)
+        [fnAltxx,fnActxx] = np.meshgrid(fnAlt, fnAct, indexing='ij') # Please use ‘ij’ indexing or you will get the transpose
+        fn2D = np.sqrt(fnAltxx*fnAltxx + fnActxx*fnActxx)
 
-        [frAltxx, frActxx] = np.meshgrid(frAlt, frAct,
-                                         indexing='ij')  # Please use ‘ij’ indexing or you will get the transpose
-        fr2D = np.sqrt(frAltxx * frAltxx + frActxx * frActxx)
-        #TODO
+        [frAltxx,frActxx] = np.meshgrid(frAlt, frAct, indexing='ij') # Please use ‘ij’ indexing or you will get the transpose
+        fr2D = np.sqrt(frAltxx*frAltxx + frActxx*frActxx)
         return fn2D, fr2D, fnAct, fnAlt
 
     def mtfDiffract(self,fr2D):
