@@ -126,6 +126,10 @@ class opticalPhase(initIsm):
 
         # Initialize toa
         toa = np.zeros((sgm_toa.shape[0], sgm_toa.shape[1]))
+
+        # Normalize the ISRF
+        isrf_norm = isrf / np.sum(isrf)  # sum isrf*dwv = 1
+        print('ISRF integral (should be 1): ', np.sum(isrf_norm))
         return toa
 
 
