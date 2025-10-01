@@ -130,6 +130,17 @@ class opticalPhase(initIsm):
         # Normalize the ISRF
         isrf_norm = isrf / np.sum(isrf)  # sum isrf*dwv = 1
         print('ISRF integral (should be 1): ', np.sum(isrf_norm))
+        # Apply the filter, ialt and iact will interpolate
+        # Interpolate the input spectrum to the ISRF wavelengths
+        for ialt in range(sgm_toa.shape[0]):
+            for iact in range(sgm_toa.shape[1]):
+            # Interpolate the input spectrum to the ISRF wavelengths
+                cs = interp1d(sgm_wv, sgm_toa[ialt,iact,:], fill_value=(0, 0), bounds_error=False)
+                toa_i = cs(wv_isrf)  # interpolated spectrum at the ISRF wavelengths
+                # point by point multiplication with the ISRF normalized
+                toa_i *= isrf_norm
+                # sum the result vector and assign to the toa[ialt, iact] position
+                toa[ialt, iact] = np.sum(toa_i)
         return toa
 
 
