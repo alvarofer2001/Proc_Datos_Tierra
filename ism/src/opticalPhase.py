@@ -116,6 +116,16 @@ class opticalPhase(initIsm):
         :return: TOA image 2D in radiances [mW/m2]
         """
         # TODO
+        # DONE
+        # Read the ISRF and normalise it with its integral
+        # ------------------------------------------------------------
+        # wv in [um]
+        isrf, wv_isrf = readIsrf(self.auxdir + '/' + self.ismConfig.isrffile, band)
+        # Sampling, wv_isrf is 0.001 um = 1 nm, change to nm
+        wv_isrf *= 1000
+
+        # Initialize toa
+        toa = np.zeros((sgm_toa.shape[0], sgm_toa.shape[1]))
         return toa
 
 
