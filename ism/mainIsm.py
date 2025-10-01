@@ -4,9 +4,10 @@
 from ism.src.ism import ism
 
 # Directory - this is the common directory for the execution of the E2E, all modules
-auxdir = r'C:\EODP\eodp_students\auxiliary'
-indir = r"C:\EODP\EODP_TER_2021_working\EODP-TS-ISM\input\gradient_alt100_act150" # small scene
-outdir = r"C:\EODP\EODP_TER_2021_working\EODP-TS-ISM\myoutput"
+auxdir = r'C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\TD\PROYECTO\\Proc_Datos_Tierra\\auxiliary'
+indir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP_TER_2021\\EODP-TS-L1B\\input\\gradient_alt100_act150"
+outdir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP_TER_2021\\EODP-TS-L1B\\myoutput"
+
 
 # Initialise the ISM
 myIsm = ism(auxdir, indir, outdir)
