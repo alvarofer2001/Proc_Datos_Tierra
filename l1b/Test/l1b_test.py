@@ -130,11 +130,11 @@ class CompareToaSimple:
 
 if __name__ == "__main__":
     auxdir = r'C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\TD\PROYECTO\\Proc_Datos_Tierra\\auxiliary'
-    output_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\output"
-    myoutput_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\myoutput"
-    plots_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\plots"
-    input_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\input"
-    noeq_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP-TS-L1B-20250911T170833Z-1-001\\EODP-TS-L1B\\myoutput_NO_EQ"
+    output_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP_TER_2021\\EODP-TS-L1B\\output"
+    myoutput_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP_TER_2021\\EODP-TS-L1B\\myoutput"
+    plots_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP_TER_2021\\EODP-TS-L1B\\plots"
+    input_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP_TER_2021\\EODP-TS-L1B\\input"
+    noeq_dir = r"C:\\Users\\alvaf\\OneDrive\\Desktop\\Carlos III\\Cuatri III\\Proc_datos_espacio\\EODP_TER_2021\\EODP-TS-L1B\\myoutput_NO_EQ"
     comp = CompareToaSimple(output_dir, myoutput_dir, plots_dir, input_dir, noeq_dir)
     comp.compare_all_bands()
 
