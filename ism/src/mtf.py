@@ -180,7 +180,7 @@ class mtf:
         #TODO
         nlines = len(fnAlt)
         Hsmear_1d=np.sinc(ksmear*fnAlt)
-        Hsmear=np.tile(Hsmear_1d.reshape(-1,1), (1, ncolums))
+        Hsmear=np.tile(Hsmear_1d.reshape(-1,1), (1, ncolumns))
         return Hsmear
 
     def mtfMotion(self, fn2D, kmotion):
