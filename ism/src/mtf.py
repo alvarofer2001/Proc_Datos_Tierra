@@ -124,6 +124,8 @@ class mtf:
         :return: diffraction MTF
         """
         #TODO
+        fr2D * fr2D
+        #Hdiff[fr2D * fr2D > 1] = 0
         return Hdiff
 
 
@@ -137,6 +139,10 @@ class mtf:
         :return: Defocus MTF
         """
         #TODO
+
+
+
+
         return Hdefoc
 
     def mtfWfeAberrations(self, fr2D, lambd, kLF, wLF, kHF, wHF):
