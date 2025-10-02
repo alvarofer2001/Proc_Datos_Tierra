@@ -178,6 +178,7 @@ class mtf:
         :return: Smearing MTF
         """
         #TODO
+        
         return Hsmear
 
     def mtfMotion(self, fn2D, kmotion):
@@ -188,6 +189,9 @@ class mtf:
         :return: detector MTF
         """
         #TODO
+
+        Hmotion=np.sinc(kmotion*fn2D)
+
         return Hmotion
 
     def plotMtf(self,Hdiff, Hdefoc, Hwfe, Hdet, Hsmear, Hmotion, Hsys, nlines, ncolumns, fnAct, fnAlt, directory, band):
