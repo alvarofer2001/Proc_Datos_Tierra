@@ -139,8 +139,6 @@ class mtf:
         :return: Defocus MTF
         """
         #TODO
-
-
         x =pi* defocus*fr2D*(1-fr2D)
         Hdefoc=(2*j1(x))/x
 
@@ -158,6 +156,7 @@ class mtf:
         :return: WFE Aberrations MTF
         """
         #TODO
+        Hwfe=math.exp(-fr2D*(1-fr2D)*((kLF*(wLF/lambd))^2+kHF*(wHF/lambd)^2))
         return Hwfe
 
     def mtfDetector(self,fn2D):
