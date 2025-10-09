@@ -105,6 +105,12 @@ class detectionPhase(initIsm):
         :return: Toa in photons
         """
         #TODO
+        h= self.constants.h_planck
+        c= self.constants.speed_light
+
+        E_in=1000*toa*area_pix*tint
+        E_ph=h*c/wv
+        toa_ph=E_in/E_ph
         return toa_ph
 
     def phot2Electr(self, toa, QE):
