@@ -145,6 +145,8 @@ class detectionPhase(initIsm):
         :return: TOA after adding PRNU [e-]
         """
         #TODO
+        prnu =  np.random.normal(0, 1, 1000)
+        toa = prnu * kprnu
         return toa
 
 
