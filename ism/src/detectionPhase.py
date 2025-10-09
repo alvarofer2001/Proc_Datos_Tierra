@@ -108,7 +108,7 @@ class detectionPhase(initIsm):
         h= self.constants.h_planck
         c= self.constants.speed_light
 
-        E_in=1000*toa*area_pix*tint
+        E_in=toa*area_pix*tint/1000
         E_ph=h*c/wv
         toa_ph=E_in/E_ph
         return toa_ph
