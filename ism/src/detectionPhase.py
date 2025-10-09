@@ -145,7 +145,7 @@ class detectionPhase(initIsm):
         :return: TOA after adding PRNU [e-]
         """
         #TODO
-        prnu =  np.random.normal(0, 1, 1000) * kprnu
+        prnu =  np.random.normal(0, 1, toa.shape[1])  * kprnu
         toa = toa * (1+prnu)
 
         return toa
@@ -162,5 +162,10 @@ class detectionPhase(initIsm):
         :param ds_B_coeff: Empirical parameter of the model 6040 K
         :return: TOA in [e-] with dark signal
         """
-        #TODO
+        # TODO
+        dsnu= np.abs( np.random.normal(0, 1, toa.shape[1]) )*kdsnu
+        sd=ds_A_coeff*(T/Tref)**3*np.exp(-ds_B_coeff*(1/T-1/Tref))
+        ds=sd*(1+dsnu)
+        toa=toa+ds
+
         return toa
