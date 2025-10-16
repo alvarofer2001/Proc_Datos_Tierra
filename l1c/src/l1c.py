@@ -65,8 +65,12 @@ class l1c(initL1c):
         #TODO
 
         tck = bisplrep(lat, lon, toa)
-        m = mgrs.MGRS()
         mgrs_tiles = set([])
+        m = mgrs.MGRS()
+        for iact in range(lat.shape[0])
+            for ialt in range (lon.shape[0])
+                mgrs_tiles.add(m.toMGRS(lar[i,j], lon[i, j], inDegrees=True,
+
         return lat_l1c, lon_l1c, toa_l1c
 
     def checkSize(self, lat,toa):
