@@ -122,6 +122,9 @@ class detectionPhase(initIsm):
         """
         #TODO
         toae=toa*QE
+        toae = np.minimum(toae, self.ismConfig.FWC)
+        # Percentage of saturated pixels
+        print(f'Percentage of saturated pixels = {(100 * np.sum(toae == self.ismConfig.FWC)) / toae.size}')
         return toae
 
     def badDeadPixels(self, toa,bad_pix,dead_pix,bad_pix_red,dead_pix_red):
