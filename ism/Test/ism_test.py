@@ -25,6 +25,8 @@ class CompareToaISM:
             filename = f"ism_toa_isrf_{band}.nc"
         elif file_type == 'optical':
             filename = f"ism_toa_optical_{band}.nc"
+        elif file_type == 'total':
+            filename = f"ism_toa_{band}.nc"
         else:
             raise ValueError(f"Tipo de archivo no válido: {file_type}")
 
@@ -153,8 +155,8 @@ if __name__ == "__main__":
     comp = CompareToaISM(output_dir, myoutput_dir, plots_dir)
 
     # Comparar ambos tipos de archivos (isrf y optical)
-    comp.compare_all_bands(file_types=['isrf', 'optical'])
-
+    #comp.compare_all_bands(file_types=['isrf', 'optical'])
+    comp.compare_all_bands(file_types=['total'])
     # Si solo quieres comparar uno de los tipos, puedes usar:
     # comp.compare_all_bands(file_types=['isrf'])  # Solo ISRF
     # comp.compare_all_bands(file_types=['optical'])  # Solo Optical
